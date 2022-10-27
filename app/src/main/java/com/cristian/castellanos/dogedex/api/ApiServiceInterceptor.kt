@@ -18,7 +18,7 @@ object ApiServiceInterceptor: Interceptor {
             if (sessionToken == null) {
                 throw RuntimeException("Need to be authenticated to perform")
             } else {
-
+                requestBuilder.addHeader("AUTH-TOKEN", sessionToken)
             }
         }
         return chain.proceed(requestBuilder.build())
