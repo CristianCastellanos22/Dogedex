@@ -1,12 +1,12 @@
 package com.cristian.castellanos.dogedex.doglist
 
 import com.cristian.castellanos.dogedex.R
-import com.cristian.castellanos.dogedex.model.Dog
 import com.cristian.castellanos.dogedex.api.ApiResponseStatus
 import com.cristian.castellanos.dogedex.api.DogsApi.retrofitServices
 import com.cristian.castellanos.dogedex.api.dto.AddDogToUserDTO
 import com.cristian.castellanos.dogedex.api.dto.DogDTOMapper
 import com.cristian.castellanos.dogedex.api.makeNetworkCall
+import com.cristian.castellanos.dogedex.model.Dog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
@@ -76,4 +76,14 @@ class DogRepository {
         val dogDTOMapper = DogDTOMapper()
         dogDTOMapper.fromDogDTOListToDogDomainList(dogDTOList)
     }
+
+    suspend fun getDogByMlId(mlDogId: String): ApiResponseStatus<Dog> = makeNetworkCall {
+        val response = retrofitServices.getDogByMlId(mlDogId)
+        if (!response.isSuccess) {
+            throw Exception(response.message)
+        }
+        val dogDTOMapper = DogDTOMapper()
+        dogDTOMapper.fromDogDTODogToDomain(response.data.dog)
+    }
+
 }

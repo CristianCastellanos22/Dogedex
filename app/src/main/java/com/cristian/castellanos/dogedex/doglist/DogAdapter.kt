@@ -42,10 +42,6 @@ class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCallback) {
                     dogListItemLayout.background = ContextCompat.getDrawable(
                         dogImage.context, R.drawable.dog_list_item_null_background
                     )
-                    dogListItemLayout.setOnLongClickListener {
-                        onLongItemClickListener?.invoke(dog)
-                        true
-                    }
                 }
             }
         }
@@ -67,8 +63,4 @@ class DogAdapter : ListAdapter<Dog, DogAdapter.DogViewHolder>(DiffCallback) {
         this.onItemClickListener = onItemClickListener
     }
 
-    private var onLongItemClickListener: ((Dog) -> Unit)? = null
-    fun setLongOnItemClickListener(onLongItemClickListener: (Dog) -> Unit) {
-        this.onLongItemClickListener = onLongItemClickListener
-    }
 }

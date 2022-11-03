@@ -56,6 +56,30 @@ dependencies {
     implementation 'androidx.camera:camera-lifecycle:1.1.0-beta02'
     implementation 'androidx.camera:camera-view:1.1.0-beta02'
 
+    //TensorFlow Lite
+    implementation("org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT")
+    implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
+
+    /*
+    //compose
+    implementation("androidx.compose.ui:ui:1.2.1")
+    // Tooling support (Previews, etc.)
+    implementation("androidx.compose.ui:ui-tooling:1.2.1")
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation("androidx.compose.foundation:foundation:1.2.1")
+    // Material Design
+    implementation("androidx.compose.material:material:1.2.1")
+    // Material design icons
+    implementation("androidx.compose.material:material-icons-core:1.2.1")
+    implementation("androidx.compose.material:material-icons-extended:1.2.1")
+    //Integration with activities
+    implementation("androidx.activity:activity-compose:1.2.1")
+    //Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    // UI Tests
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.0")
+    */
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

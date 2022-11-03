@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import com.cristian.castellanos.dogedex.MainActivity
+import com.cristian.castellanos.dogedex.main.MainActivity
 import com.cristian.castellanos.dogedex.R
 import com.cristian.castellanos.dogedex.api.ApiResponseStatus
 import com.cristian.castellanos.dogedex.databinding.ActivityLoginBinding
