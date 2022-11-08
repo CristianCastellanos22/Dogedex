@@ -1,15 +1,13 @@
 package com.cristian.castellanos.dogedex.dogdetail
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
-import com.cristian.castellanos.dogedex.model.Dog
 import com.cristian.castellanos.dogedex.R
-import com.cristian.castellanos.dogedex.api.ApiResponseStatus
 import com.cristian.castellanos.dogedex.databinding.ActivityDogDetailBinding
+import com.cristian.castellanos.dogedex.model.Dog
 
 class DogDetailActivity : AppCompatActivity() {
 
@@ -34,7 +32,9 @@ class DogDetailActivity : AppCompatActivity() {
             binding.dog = dog
             dogImage.load(dog.imageUrl)
 
-            viewModel.status.observe(this@DogDetailActivity) {
+            //Se comenta por que se cambio el tipo de dato en el viewmodel, para poder funcionar con
+            //compose
+            /*viewModel.status.observe(this@DogDetailActivity) {
                 when (it) {
                     is ApiResponseStatus.Error -> {
                         loadingWheel.visibility = View.GONE
@@ -46,7 +46,7 @@ class DogDetailActivity : AppCompatActivity() {
                         finish()
                     }
                 }
-            }
+            }*/
 
             closeButton.setOnClickListener {
                 if (isRecognition) {
@@ -62,4 +62,5 @@ class DogDetailActivity : AppCompatActivity() {
         const val DOG_KEY = "dog"
         const val IS_RECOGNITION_KEY = "is_recognition"
     }
+
 }

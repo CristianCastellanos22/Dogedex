@@ -32,4 +32,7 @@
     <string name="button_for_settings">Button for settings</string>
     <string name="logout">Logout</string>
     <string name="error_adding_dog">There was an error adding dog to collection</string>
+    <string name="title_activity_dog_detail_compose">DogDetailComposeActivity</string>
+    <string name="error_dialog_title">Oops, something happened!</string>
+    <string name="try_again">Try again</string>
 </resources>
