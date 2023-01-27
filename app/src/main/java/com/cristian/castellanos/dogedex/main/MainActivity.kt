@@ -16,6 +16,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.core.content.ContextCompat
 import coil.annotation.ExperimentalCoilApi
 import com.cristian.castellanos.dogedex.LABEL_PATH
@@ -35,6 +36,7 @@ import org.tensorflow.lite.support.common.FileUtil
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 class MainActivity : AppCompatActivity() {
 

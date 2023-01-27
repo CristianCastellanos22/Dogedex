@@ -3,10 +3,12 @@ package com.cristian.castellanos.dogedex.settings
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.ExperimentalMaterialApi
 import com.cristian.castellanos.dogedex.auth.LoginActivity
 import com.cristian.castellanos.dogedex.databinding.ActivitySettingsBinding
 import com.cristian.castellanos.dogedex.model.User
 
+@ExperimentalMaterialApi
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
