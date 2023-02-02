@@ -24,6 +24,8 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.cristian.castellanos.dogedex.R
 import com.cristian.castellanos.dogedex.api.ApiResponseStatus
+import com.cristian.castellanos.dogedex.composables.ErrorDialog
+import com.cristian.castellanos.dogedex.composables.LoadingWheel
 import com.cristian.castellanos.dogedex.model.Dog
 
 @ExperimentalCoilApi
@@ -58,38 +60,9 @@ fun DogDetailScreen(
         if (status is ApiResponseStatus.Loading) {
             LoadingWheel()
         } else if (status is ApiResponseStatus.Error) {
-            ErrorDialog(status = status, onDialogDismiss = onErrorDialogDismiss)
+            ErrorDialog(status.messageId, onDialogDismiss = onErrorDialogDismiss)
         }
     }
-}
-
-@Composable
-fun LoadingWheel() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator(color = Color.Red)
-    }
-}
-
-@Composable
-fun ErrorDialog(
-    status: ApiResponseStatus.Error<Any>,
-    onDialogDismiss: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = {},
-        title = {
-            Text(text = stringResource(id = R.string.error_dialog_title))
-        },
-        text = {
-            Text(stringResource(id = status.messageId))
-        }, confirmButton = {
-            Button(
-                onClick = { onDialogDismiss() },
-            ) {
-                Text(text = stringResource(R.string.try_again))
-            }
-        }
-    )
 }
 
 @Composable

@@ -27,23 +27,23 @@ import com.cristian.castellanos.dogedex.auth.LoginActivity
 import com.cristian.castellanos.dogedex.databinding.ActivityMainBinding
 import com.cristian.castellanos.dogedex.dogdetail.DogDetailComposeActivity
 import com.cristian.castellanos.dogedex.doglist.DogListActivity
-import com.cristian.castellanos.dogedex.machinelearning.Classifier
 import com.cristian.castellanos.dogedex.machinelearning.DogRecognition
 import com.cristian.castellanos.dogedex.model.Dog
 import com.cristian.castellanos.dogedex.model.User
 import com.cristian.castellanos.dogedex.settings.SettingsActivity
+import dagger.hilt.android.AndroidEntryPoint
 import org.tensorflow.lite.support.common.FileUtil
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var imageCapture: ImageCapture
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var classifier: Classifier
     private var isCameraReady: Boolean = false
     private val viewModel: MainViewModel by viewModels()
 
@@ -111,14 +111,6 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(DogDetailComposeActivity.IS_RECOGNITION_KEY, true)
         startActivity(intent)
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.setupClassifier(
-            FileUtil.loadMappedFile(this@MainActivity, MODEL_PATH),
-            FileUtil.loadLabels(this@MainActivity, LABEL_PATH)
-        )
     }
 
     private fun setupCamera() {
@@ -237,7 +229,8 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             binding.takePhotoFab.alpha = 0.2f
-            binding.takePhotoFab.setOnClickListener(null
+            binding.takePhotoFab.setOnClickListener(
+                null
             )
         }
     }

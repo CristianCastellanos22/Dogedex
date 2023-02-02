@@ -10,8 +10,10 @@ import com.cristian.castellanos.dogedex.R
 import com.cristian.castellanos.dogedex.api.ApiResponseStatus
 import com.cristian.castellanos.dogedex.dogdetail.ui.theme.DogedexTheme
 import com.cristian.castellanos.dogedex.model.Dog
+import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalCoilApi
+@AndroidEntryPoint
 class DogDetailComposeActivity : ComponentActivity() {
 
     private val viewModel: DogDetailViewModel by viewModels()

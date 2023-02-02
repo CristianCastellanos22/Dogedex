@@ -1,22 +1,22 @@
 package com.cristian.castellanos.dogedex.doglist
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cristian.castellanos.dogedex.model.Dog
 import com.cristian.castellanos.dogedex.api.ApiResponseStatus
+import com.cristian.castellanos.dogedex.model.Dog
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DogListViewModel : ViewModel() {
+@HiltViewModel
+class DogListViewModel @Inject constructor(private val dogRepository: DogTasks) : ViewModel() {
 
     var dogList = mutableStateOf<List<Dog>>(listOf())
         private set
 
     var status = mutableStateOf<ApiResponseStatus<Any>?>(null)
-
-    private val dogRepository = DogRepository()
+        private set
 
     init {
         getDogCollection()
@@ -35,6 +35,10 @@ class DogListViewModel : ViewModel() {
             dogList.value = apiResponseStatus.data ?: list
         }
         status.value = apiResponseStatus as ApiResponseStatus<Any>
+    }
+
+    fun resetApiResponseStatus() {
+        status.value = null
     }
 
 }

@@ -6,24 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cristian.castellanos.dogedex.api.ApiResponseStatus
-import com.cristian.castellanos.dogedex.doglist.DogRepository
+import com.cristian.castellanos.dogedex.doglist.DogTasks
 import com.cristian.castellanos.dogedex.machinelearning.Classifier
-import com.cristian.castellanos.dogedex.machinelearning.ClassifierRepository
+import com.cristian.castellanos.dogedex.machinelearning.ClassifierTasks
 import com.cristian.castellanos.dogedex.machinelearning.DogRecognition
 import com.cristian.castellanos.dogedex.model.Dog
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.nio.MappedByteBuffer
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val dogRepository: DogTasks,
+    private val classifierRepository: ClassifierTasks
+) : ViewModel() {
 
-    private val dogRepository = DogRepository()
-    private lateinit var classifierRepository: ClassifierRepository
     private lateinit var classifier: Classifier
-
-    fun setupClassifier(tfLiteModel: MappedByteBuffer, labels: List<String>) {
-        classifier = Classifier(tfLiteModel, labels)
-        classifierRepository = ClassifierRepository(classifier)
-    }
 
     private val _dog = MutableLiveData<Dog>()
     val dog: LiveData<Dog> get() = _dog
@@ -33,6 +31,8 @@ class MainViewModel : ViewModel() {
 
     private val _dogRecognition = MutableLiveData<DogRecognition>()
     val dogRecognition: LiveData<DogRecognition> get() = _dogRecognition
+
+    val probableDogIds = ArrayList<String>()
 
     fun getDogByMlId(mlDogId: String) {
         viewModelScope.launch {
