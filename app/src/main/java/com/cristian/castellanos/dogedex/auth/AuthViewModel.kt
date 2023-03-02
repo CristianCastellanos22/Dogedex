@@ -60,14 +60,20 @@ class AuthViewModel @Inject constructor(private val authRepository : AuthTasks) 
     }
 
     fun login(email: String, password: String) {
-        viewModelScope.launch {
-            status.value = ApiResponseStatus.Loading()
-            handleResponseStatus(
-                authRepository.login(
-                    email,
-                    password
-                )
-            )
+        when {
+            email.isEmpty() -> emailError.value = R.string.email_is_not_valid
+            password.isEmpty() -> passwordError.value = R.string.password_must_not_be_empty
+            else -> {
+                viewModelScope.launch {
+                    status.value = ApiResponseStatus.Loading()
+                    handleResponseStatus(
+                        authRepository.login(
+                            email,
+                            password
+                        )
+                    )
+                }
+            }
         }
     }
 

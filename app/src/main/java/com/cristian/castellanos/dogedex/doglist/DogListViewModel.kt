@@ -30,9 +30,8 @@ class DogListViewModel @Inject constructor(private val dogRepository: DogTasks) 
     }
 
     private fun handleResponseStatus(apiResponseStatus: ApiResponseStatus<List<Dog>>) {
-        val list = emptyList<Dog>()
         if (apiResponseStatus is ApiResponseStatus.Success) {
-            dogList.value = apiResponseStatus.data ?: list
+            dogList.value = apiResponseStatus.data
         }
         status.value = apiResponseStatus as ApiResponseStatus<Any>
     }
